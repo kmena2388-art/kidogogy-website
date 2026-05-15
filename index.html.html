@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Kidogogy Egypt | Sidi Bishr · Alexandria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --yellow: #FFD700;
+  --yellow-dark: #e6c000;
+  --black: #111111;
+  --green: #22c55e;
+  --green-dark: #16a34a;
+  --red: #ef4444;
+  --purple: #6d28d9;
+  --purple-light: #ede9fe;
+  --bg: #f9f7f0;
+  --card: #ffffff;
+  --text: #111111;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+body, html { height: 100%; font-family: 'Nunito', sans-serif; background: var(--black); color: var(--text); overflow: hidden; }
+
+.page { display: none; height: 100dvh; width: 100%; }
+.page.active { display: flex; }
+
+/* WELCOME */
+#p-welcome { flex-direction: column; align-items: center; justify-content: center; background: var(--black); position: relative; overflow: hidden; }
+#p-welcome::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%); top: -120px; left: -80px; pointer-events: none; }
+.welcome-tag { display: inline-flex; align-items: center; gap: 8px; border: 2.5px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.65); font-weight: 800; font-size: 11px; letter-spacing: 2px; padding: 8px 20px; border-radius: 40px; text-transform: uppercase; margin-bottom: 36px; }
+.dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 1.8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+.logo-btn { width: min(75vw, 270px); height: min(75vw, 270px); background: var(--yellow); border-radius: 48px; border: 8px solid #fff; box-shadow: 0 12px 0 #fff, 0 15px 0 rgba(0,0,0,0.25); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.12s, box-shadow 0.12s; }
+.logo-btn:active { transform: translateY(10px); box-shadow: 0 2px 0 #fff; }
+.logo-word { font-family: 'Fredoka One', cursive; font-size: clamp(40px, 12vw, 56px); color: var(--black); line-height: 0.9; text-align: center; }
+.logo-sub { font-size: 10px; font-weight: 900; letter-spacing: 2.5px; color: rgba(0,0,0,0.5); margin-top: 14px; text-transform: uppercase; }
+.welcome-footer { margin-top: 10px; color: rgba(255,255,255,0.3); font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; }
+
+/* APP */
+#p-app { flex-direction: column; background: var(--bg); overflow: hidden; }
+.app-header { background: var(--black); padding: 16px 20px 14px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; border-bottom: 4px solid var(--yellow); }
+.app-header-title { font-family: 'Fredoka One', cursive; color: var(--yellow); font-size: 22px; line-height: 1; }
+.app-header-sub { font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+.status-pill { display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 30px; font-size: 10px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+.status-pill.open { background: rgba(34,197,94,0.12); color: var(--green); border: 1.5px solid rgba(34,197,94,0.3); }
+.status-pill.closed { background: rgba(239,68,68,0.12); color: var(--red); border: 1.5px solid rgba(239,68,68,0.3); }
+.status-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 1.8s infinite; }
+.app-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 20px 16px 40px; }
+
+/* HERO */
+.hero-strip { background: var(--black); border-radius: 20px; padding: 22px 20px; margin-bottom: 16px; border: 3px solid var(--yellow); position: relative; overflow: hidden; }
+.hero-strip::after { content: '⭐'; position: absolute; right: -12px; top: -12px; font-size: 90px; opacity: 0.05; pointer-events: none; }
+.hero-strip h1 { font-family: 'Fredoka One', cursive; color: var(--yellow); font-size: 26px; line-height: 1.1; margin-bottom: 8px; }
+.hero-strip p { color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 700; line-height: 1.55; }
+
+/* TRUST */
+.trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.trust-badge { background: var(--card); border: 2.5px solid var(--black); border-radius: 16px; padding: 14px 12px; box-shadow: 4px 4px 0 var(--black); text-align: center; }
+.trust-badge .tb-icon { font-size: 26px; margin-bottom: 5px; }
+.trust-badge .tb-val { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--black); line-height: 1; }
+.trust-badge .tb-lbl { font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+
+/* TESTIMONIALS */
+.section-label { font-size: 11px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin: 4px 0 10px 4px; }
+.testi-wrap { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.testi-wrap::-webkit-scrollbar { display: none; }
+.testi-card { flex-shrink: 0; width: 220px; background: var(--card); border: 2.5px solid var(--black); border-radius: 18px; padding: 16px; box-shadow: 4px 4px 0 var(--black); }
+.testi-card .stars { color: var(--yellow); font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; }
+.testi-card .quote { font-size: 12px; font-weight: 700; color: #333; line-height: 1.5; margin-bottom: 10px; }
+.testi-card .parent-name { font-size: 11px; font-weight: 900; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* FORM CARD */
+.reg-card { background: var(--card); border: 3px solid var(--black); border-radius: 22px; padding: 22px 18px; box-shadow: 6px 6px 0 var(--black); margin-bottom: 16px; }
+.reg-card h2 { font-family: 'Fredoka One', cursive; font-size: 24px; margin-bottom: 4px; }
+.reg-sub { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 20px; }
+.field-label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.8px; color: #444; margin-bottom: 7px; display: block; }
+.field-input { width: 100%; padding: 14px 16px; border: 2.5px solid var(--black); border-radius: 14px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; background: #fafafa; color: var(--text); margin-bottom: 16px; -webkit-appearance: none; appearance: none; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.field-input:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(255,215,0,0.2); background: #fff; }
+select.field-input { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23111' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; }
+.gender-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.gender-btn { padding: 14px 10px; border: 2.5px solid var(--border); border-radius: 14px; background: #fafafa; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; text-align: center; transition: all 0.15s; color: var(--muted); }
+.gender-btn.sel-boy { border-color: #3b82f6; background: #eff6ff; color: #1d4ed8; box-shadow: 3px 3px 0 #3b82f6; }
+.gender-btn.sel-girl { border-color: #ec4899; background: #fdf2f8; color: #be185d; box-shadow: 3px 3px 0 #ec4899; }
+.btn-submit { width: 100%; padding: 18px; background: var(--black); color: var(--yellow); border: none; border-radius: 16px; font-family: 'Fredoka One', cursive; font-size: 20px; cursor: pointer; box-shadow: 0 6px 0 rgba(0,0,0,0.35); transition: transform 0.12s, box-shadow 0.12s; letter-spacing: 0.5px; margin-top: 6px; }
+.btn-submit:active { transform: translateY(5px); box-shadow: 0 1px 0 rgba(0,0,0,0.35); }
+.btn-submit:disabled { opacity: 0.6; pointer-events: none; }
+.spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(255,215,0,0.3); border-top-color: var(--yellow); border-radius: 50%; animation: spin 0.7s linear infinite; margin: 0 auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* PAYMENT */
+.payment-card { background: var(--black); border: 3px solid var(--yellow); border-radius: 22px; padding: 22px 18px; margin-bottom: 16px; box-shadow: 6px 6px 0 var(--yellow-dark); }
+.payment-card h3 { font-family: 'Fredoka One', cursive; color: var(--yellow); font-size: 20px; margin-bottom: 14px; }
+.instapay-num { font-family: 'Fredoka One', cursive; font-size: 32px; color: #fff; letter-spacing: 2px; margin: 8px 0; }
+.btn-copy { width: 100%; padding: 12px; background: rgba(255,215,0,0.1); border: 2px solid var(--yellow); color: var(--yellow); border-radius: 12px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px; cursor: pointer; margin-bottom: 10px; transition: background 0.15s; }
+.btn-copy:active { background: rgba(255,215,0,0.22); }
+.btn-wa { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: #22c55e; color: white; border: none; border-radius: 14px; font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 15px; cursor: pointer; text-decoration: none; box-shadow: 0 4px 0 #16a34a; transition: transform 0.12s, box-shadow 0.12s; }
+.btn-wa:active { transform: translateY(3px); box-shadow: 0 1px 0 #16a34a; }
+.wa-icon { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+
+/* SUCCESS */
+#p-success { flex-direction: column; align-items: center; background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.success-header { width: 100%; background: var(--black); padding: 40px 24px 30px; text-align: center; border-bottom: 4px solid var(--green); }
+.success-icon { width: 80px; height: 80px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 16px; box-shadow: 0 0 0 12px rgba(34,197,94,0.12); animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
+.success-header h1 { font-family: 'Fredoka One', cursive; color: var(--yellow); font-size: 28px; margin-bottom: 8px; }
+.success-header p { color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 700; line-height: 1.55; }
+.success-body { width: 100%; padding: 24px 16px 48px; }
+.next-card { background: var(--card); border: 3px solid var(--black); border-radius: 22px; padding: 20px; margin-bottom: 16px; box-shadow: 5px 5px 0 var(--black); }
+.next-card h3 { font-family: 'Fredoka One', cursive; font-size: 20px; margin-bottom: 14px; }
+.step-item { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+.step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--yellow); border: 2.5px solid var(--black); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 13px; }
+.step-text strong { display: block; font-weight: 900; font-size: 14px; margin-bottom: 2px; }
+.step-text span { font-size: 12px; color: var(--muted); font-weight: 700; }
+.promo-card { background: var(--purple-light); border: 3px solid var(--purple); border-radius: 20px; padding: 18px; margin-bottom: 16px; box-shadow: 5px 5px 0 var(--purple); text-align: center; }
+.promo-card h3 { font-family: 'Fredoka One', cursive; color: var(--purple); font-size: 20px; margin-bottom: 8px; }
+.promo-card p { font-size: 13px; font-weight: 700; color: #4c1d95; line-height: 1.5; }
+.btn-home { width: 100%; padding: 16px; background: var(--black); color: var(--yellow); border: none; border-radius: 16px; font-family: 'Fredoka One', cursive; font-size: 18px; cursor: pointer; box-shadow: 0 5px 0 rgba(0,0,0,0.3); transition: transform 0.12s, box-shadow 0.12s; margin-top: 8px; }
+.btn-home:active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0,0,0,0.3); }
+
+/* FAIL */
+#p-fail { flex-direction: column; align-items: center; background: var(--bg); overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.fail-header { width: 100%; background: var(--black); padding: 40px 24px 30px; text-align: center; border-bottom: 4px solid var(--red); }
+.fail-icon { width: 80px; height: 80px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 16px; box-shadow: 0 0 0 12px rgba(239,68,68,0.12); }
+.fail-header h1 { font-family: 'Fredoka One', cursive; color: #fff; font-size: 26px; margin-bottom: 8px; }
+.fail-header p { color: rgba(255,255,255,0.58); font-size: 13px; font-weight: 700; line-height: 1.55; }
+.fail-body { width: 100%; padding: 24px 16px 48px; }
+.fail-data-card { background: var(--card); border: 3px solid var(--black); border-radius: 20px; padding: 18px; margin-bottom: 14px; box-shadow: 5px 5px 0 var(--black); }
+.fail-data-card h3 { font-family: 'Fredoka One', cursive; font-size: 18px; margin-bottom: 12px; color: var(--red); }
+.fail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border); }
+.fail-row:last-child { border-bottom: none; }
+.fail-row .fk { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.fail-row .fv { color: var(--text); font-size: 13px; font-weight: 900; text-align: right; max-width: 60%; word-break: break-word; }
+.btn-wa-big { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background: #22c55e; color: white; border: none; border-radius: 16px; font-family: 'Fredoka One', cursive; font-size: 18px; cursor: pointer; box-shadow: 0 5px 0 #16a34a; text-decoration: none; transition: transform 0.12s, box-shadow 0.12s; margin-bottom: 12px; }
+.btn-wa-big:active { transform: translateY(4px); box-shadow: 0 1px 0 #16a34a; }
+.btn-retry { width: 100%; padding: 16px; background: #fff; color: var(--black); border: 2.5px solid var(--black); border-radius: 16px; font-family: 'Fredoka One', cursive; font-size: 18px; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.15); transition: transform 0.12s, box-shadow 0.12s; }
+.btn-retry:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.15); }
+
+.close-btn { background: none; border: none; color: var(--muted); font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 13px; width: 100%; padding: 20px 0; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; }
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--black); color: var(--yellow); padding: 12px 24px; border-radius: 40px; font-weight: 900; font-size: 14px; z-index: 9999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; border: 2px solid var(--yellow); }
+.toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<div id="p-welcome" class="page active">
+  <div class="welcome-tag">
+    <span class="dot-live" id="wdot"></span>
+    <span>Sidi Bishr · Alexandria</span>
+  </div>
+  <div class="logo-btn" onclick="goTo('p-app')">
+    <div class="logo-word">KIDO<br>GOGY</div>
+    <div class="logo-sub">Tap to Enter</div>
+  </div>
+  <p class="welcome-footer" style="margin-top:36px;">Egypt · Alexandria · Sidi Bishr</p>
+  <p class="welcome-footer" style="margin-top:6px; font-size:10px; opacity:0.4;">Office Portal v3.0</p>
+</div>
+
+<!-- MAIN APP -->
+<div id="p-app" class="page">
+  <div class="app-header">
+    <div>
+      <div class="app-header-title">Kidogogy</div>
+      <div class="app-header-sub">Egypt · Sidi Bishr, Alexandria</div>
+    </div>
+    <div class="status-pill open" id="status-pill">
+      <span class="dot"></span>
+      <span id="status-txt">Open</span>
+    </div>
+  </div>
+
+  <div class="app-scroll">
+
+    <div class="hero-strip">
+      <h1>Where Every Child Shines ✨</h1>
+      <p>Alexandria's most trusted nursery — nurturing curious, confident little minds in a safe, joyful environment. Give your child the best start in life.</p>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-badge"><div class="tb-icon">👶</div><div class="tb-val">500+</div><div class="tb-lbl">Happy Children</div></div>
+      <div class="trust-badge"><div class="tb-icon">⭐</div><div class="tb-val">4.9</div><div class="tb-lbl">Parent Rating</div></div>
+      <div class="trust-badge"><div class="tb-icon">🎓</div><div class="tb-val">15+</div><div class="tb-lbl">Expert Teachers</div></div>
+      <div class="trust-badge"><div class="tb-icon">🏆</div><div class="tb-val">10+</div><div class="tb-lbl">Years in Alex</div></div>
+    </div>
+
+    <div class="section-label">What Parents Say</div>
+    <div class="testi-wrap">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"I was hesitant at first — but after seeing my daughter smile every single morning, I knew Kidogogy was the right choice."</p>
+        <div class="parent-name">— Nada M., Parent</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"My son's confidence grew so much in just one month. The teachers truly care about each child. I will absolutely put my next child here too!"</p>
+        <div class="parent-name">— Ahmed K., Parent</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"Clean, safe, and full of love. The French class has been amazing — my daughter now counts to ten in French! It's a great nursery."</p>
+        <div class="parent-name">— Mariam T., Parent</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"The Summer Camp was unforgettable. My boy came home with a new drawing and a big smile every day. Worth every pound!"</p>
+        <div class="parent-name">— Omar S., Parent</div>
+      </div>
+    </div>
+
+    <div class="reg-card">
+      <h2>Register Now</h2>
+      <p class="reg-sub">Spots fill up fast — secure your child's place today!</p>
+
+      <label class="field-label">Child's Full Name</label>
+      <input class="field-input" id="f-child" type="text" placeholder="e.g. Youssef Ahmed">
+
+      <label class="field-label">Child's Gender</label>
+      <div class="gender-row">
+        <button class="gender-btn" id="btn-boy" type="button" onclick="selectGender('boy')">👦 Boy</button>
+        <button class="gender-btn" id="btn-girl" type="button" onclick="selectGender('girl')">👧 Girl</button>
+      </div>
+
+      <label class="field-label">Child's Age</label>
+      <select class="field-input" id="f-age">
+        <option value="">Select age...</option>
+        <option>Under 1 year (Infant)</option>
+        <option>1 year</option>
+        <option>2 years</option>
+        <option>3 years</option>
+        <option>4 years</option>
+        <option>5 years</option>
+        <option>6+ years</option>
+      </select>
+
+      <label class="field-label">Parent / Guardian Name</label>
+      <input class="field-input" id="f-parent" type="text" placeholder="e.g. Hana Ibrahim">
+
+      <label class="field-label">Parent Email</label>
+      <input class="field-input" id="f-email" type="email" placeholder="your@email.com">
+
+      <label class="field-label">WhatsApp Number</label>
+      <input class="field-input" id="f-phone" type="tel" placeholder="e.g. 01xxxxxxxxx">
+
+      <label class="field-label">Course / Program</label>
+      <select class="field-input" id="f-course">
+        <option value="">Choose a program...</option>
+        <option>🌞 Summer Camp (Starting July 1st)</option>
+        <option>🇫🇷 French Class</option>
+        <option>🇬🇧 English Class</option>
+        <option>👶 Infant Program</option>
+      </select>
+
+      <label class="field-label">How did you hear about us?</label>
+      <select class="field-input" id="f-source">
+        <option>Friend or Family</option>
+        <option>Instagram</option>
+        <option>Facebook</option>
+        <option>Google Search</option>
+        <option>Passing by the office</option>
+        <option>Other</option>
+      </select>
+
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+        <span id="btn-label">Send Application ➤</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+
+    <div class="payment-card">
+      <h3>⚡ InstaPay Payment</h3>
+      <p style="color:rgba(255,255,255,0.5); font-size:12px; font-weight:700; margin-bottom:6px;">Pay fees securely via InstaPay</p>
+      <div class="instapay-num">01274622004</div>
+      <button class="btn-copy" onclick="copyNum()">📋 Copy Number</button>
+      <a class="btn-wa" href="https://wa.me/201274622004" target="_blank">
+        <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.12 1.524 5.858L0 24l6.29-1.506A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.374l-.36-.213-3.724.892.935-3.618-.234-.371A9.818 9.818 0 1112 21.818z"/></svg>
+        Send Receipt via WhatsApp
+      </a>
+    </div>
+
+    <button class="close-btn" onclick="goTo('p-welcome')">✕ Close Session</button>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div id="p-success" class="page">
+  <div class="success-header">
+    <div class="success-icon">✓</div>
+    <h1>You're All Set!</h1>
+    <p>Application received! Our team will contact you within 24 hours to confirm your child's place.</p>
+  </div>
+  <div class="success-body">
+    <div class="next-card">
+      <h3>What Happens Next?</h3>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Check Your Email</strong><span>A confirmation copy has been sent to your inbox</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>We'll Call You</strong><span>Our team will WhatsApp you to confirm details and fees</span></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Complete Payment</strong><span>Pay via InstaPay (01274622004) and send your receipt on WhatsApp</span></div>
+      </div>
+      <div class="step-item" style="margin-bottom:0">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Welcome to Kidogogy! 🎉</strong><span>Your child's amazing journey begins here</span></div>
+      </div>
+    </div>
+
+    <div class="promo-card">
+      <h3>A Great Choice! 💜</h3>
+      <p>Every parent who joined Kidogogy says the same thing: "I wish I'd signed up sooner." Your child is going to love it here — and so will you. It truly is a great nursery.</p>
+    </div>
+
+    <a class="btn-wa" href="https://wa.me/201274622004?text=Hello!%20I%20just%20registered%20my%20child%20at%20Kidogogy%20Egypt%20%F0%9F%8E%89" target="_blank" style="display:flex; margin-bottom:12px;">
+      <svg class="wa-icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.12 1.524 5.858L0 24l6.29-1.506A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.374l-.36-.213-3.724.892.935-3.618-.234-.371A9.818 9.818 0 1112 21.818z"/></svg>
+      Say Hello on WhatsApp
+    </a>
+    <button class="btn-home" onclick="goTo('p-welcome')">Back to Home</button>
+  </div>
+</div>
+
+<!-- FAIL -->
+<div id="p-fail" class="page">
+  <div class="fail-header">
+    <div class="fail-icon">⚠️</div>
+    <h1>Submission Issue</h1>
+    <p>Don't worry — your details are saved below. Please send them to our team via WhatsApp so we don't lose your application.</p>
+  </div>
+  <div class="fail-body">
+    <div class="fail-data-card">
+      <h3>Application Details</h3>
+      <div class="fail-row"><span class="fk">Child Name</span><span class="fv" id="fd-child">—</span></div>
+      <div class="fail-row"><span class="fk">Gender</span><span class="fv" id="fd-gender">—</span></div>
+      <div class="fail-row"><span class="fk">Age</span><span class="fv" id="fd-age">—</span></div>
+      <div class="fail-row"><span class="fk">Parent Name</span><span class="fv" id="fd-parent">—</span></div>
+      <div class="fail-row"><span class="fk">Email</span><span class="fv" id="fd-email">—</span></div>
+      <div class="fail-row"><span class="fk">WhatsApp</span><span class="fv" id="fd-phone">—</span></div>
+      <div class="fail-row"><span class="fk">Course</span><span class="fv" id="fd-course">—</span></div>
+    </div>
+    <p style="font-size:12px; font-weight:800; color:var(--muted); text-align:center; margin-bottom:14px; line-height:1.5;">Tap below — WhatsApp will open with all your details pre-filled and ready to send to our team.</p>
+    <a id="wa-fail-link" class="btn-wa-big" href="#" target="_blank">
+      <svg style="width:22px;height:22px;fill:white;flex-shrink:0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.12 1.524 5.858L0 24l6.29-1.506A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.001-1.374l-.36-.213-3.724.892.935-3.618-.234-.371A9.818 9.818 0 1112 21.818z"/></svg>
+      Send to Kidogogy Team
+    </a>
+    <button class="btn-retry" onclick="goTo('p-app')">← Try Again</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">✓ Number copied!</div>
+
+<script>
+const OWNER_EMAIL = 'YOUR_EMAIL@GMAIL.COM'; // ← Replace with your real email
+const OWNER_WA    = '201274622004';
+const FORMSUBMIT  = `https://formsubmit.co/ajax/${OWNER_EMAIL}`;
+
+let selectedGender = '';
+
+function goTo(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function selectGender(g) {
+  selectedGender = g;
+  document.getElementById('btn-boy').className  = 'gender-btn' + (g === 'boy'  ? ' sel-boy'  : '');
+  document.getElementById('btn-girl').className = 'gender-btn' + (g === 'girl' ? ' sel-girl' : '');
+}
+
+function copyNum() {
+  navigator.clipboard.writeText('01274622004').catch(() => {});
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function updateStatus() {
+  const h = new Date().getHours();
+  const open = h >= 9 && h < 17;
+  const pill = document.getElementById('status-pill');
+  document.getElementById('status-txt').textContent = open ? 'Open Now' : 'Closed';
+  pill.className = 'status-pill ' + (open ? 'open' : 'closed');
+  document.getElementById('wdot').style.background = open ? '#22c55e' : '#ef4444';
+}
+updateStatus();
+
+function submitForm() {
+  const child  = document.getElementById('f-child').value.trim();
+  const age    = document.getElementById('f-age').value;
+  const parent = document.getElementById('f-parent').value.trim();
+  const email  = document.getElementById('f-email').value.trim();
+  const phone  = document.getElementById('f-phone').value.trim();
+  const course = document.getElementById('f-course').value;
+  const source = document.getElementById('f-source').value;
+
+  if (!child || !parent || !email || !phone || !course || !selectedGender) {
+    alert('Please fill in all fields and select your child\'s gender.');
+    return;
+  }
+
+  const lbl = document.getElementById('btn-label');
+  const spn = document.getElementById('spinner');
+  const btn = document.getElementById('submit-btn');
+  lbl.style.display = 'none';
+  spn.style.display  = 'block';
+  btn.disabled = true;
+
+  const data = {
+    _subject: `New Registration — ${child} | Kidogogy Egypt`,
+    _cc: email,
+    'Child Name': child,
+    'Gender': selectedGender === 'boy' ? 'Boy' : 'Girl',
+    'Age': age || 'Not specified',
+    'Parent Name': parent,
+    'Parent Email': email,
+    'WhatsApp': phone,
+    'Course': course,
+    'Source': source,
+    'Office': 'Sidi Bishr, Alexandria'
+  };
+
+  fetch(FORMSUBMIT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.success === 'true' || res.success === true) {
+      goTo('p-success');
+    } else {
+      showFail({ child, gender: selectedGender, age, parent, email, phone, course });
+    }
+  })
+  .catch(() => {
+    showFail({ child, gender: selectedGender, age, parent, email, phone, course });
+  })
+  .finally(() => {
+    lbl.style.display = 'block';
+    spn.style.display  = 'none';
+    btn.disabled = false;
+  });
+}
+
+function showFail(d) {
+  document.getElementById('fd-child').textContent  = d.child  || '—';
+  document.getElementById('fd-gender').textContent = d.gender === 'boy' ? '👦 Boy' : '👧 Girl';
+  document.getElementById('fd-age').textContent    = d.age    || '—';
+  document.getElementById('fd-parent').textContent = d.parent || '—';
+  document.getElementById('fd-email').textContent  = d.email  || '—';
+  document.getElementById('fd-phone').textContent  = d.phone  || '—';
+  document.getElementById('fd-course').textContent = d.course || '—';
+
+  const msg = encodeURIComponent(
+    `📋 *New Registration — Kidogogy Egypt*\n` +
+    `━━━━━━━━━━━━━━\n` +
+    `Child: ${d.child}\n` +
+    `Gender: ${d.gender === 'boy' ? 'Boy' : 'Girl'}\n` +
+    `Age: ${d.age || 'N/A'}\n` +
+    `Parent: ${d.parent}\n` +
+    `Email: ${d.email}\n` +
+    `WhatsApp: ${d.phone}\n` +
+    `Course: ${d.course}\n` +
+    `Office: Sidi Bishr, Alexandria`
+  );
+  document.getElementById('wa-fail-link').href = `https://wa.me/${OWNER_WA}?text=${msg}`;
+  goTo('p-fail');
+}
+</script>
+</body>
+</html>
